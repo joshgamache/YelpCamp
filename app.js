@@ -4,8 +4,19 @@ const express    = require("express"),
 	  bodyParser = require("body-parser"),
 	  mongoose   = require("mongoose");
 
+// Set up MongoDB/mongoose using ATLAS to make it server-independent (code pulled from MongoDB atlas page )
+const mongoURI = "mongodb+srv://devidle:" + process.env.MDBauth + "@cluster0-jcmtm.mongodb.net/test?retryWrites=true&w=majority";
+mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    dbName: "YelpCamp",
+    useFindAndModify: false
+}, ).then(() => {
+    console.log('Connected to DB!');
+}).catch(err => {
+    console.log('ERROR:', err.message);
+});
+
 // module activation and linking
-mongoose.connect("mongodb://localhost:27017/yelp_camp",  { useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
@@ -20,7 +31,7 @@ var Campground = mongoose.model("Campground", campgroundSchema);
 // Create a campground, based on the previous schema, within the database
 // Campground.create(
 // {
-// 	name: "Bow River", 
+// 	name: "Bow River",
 // 	image: "https://farm9.staticflickr.com/8167/7121865553_e1c6a31f07.jpg",
 // 	description: "This is a river. It's watery and it has places to camp"
 // }, function(err, campground){
@@ -77,7 +88,7 @@ app.post("/campgrounds", function(req, res){
 	// redirect back to campgrounds page
 
 	});
-	
+
 	// campgrounds.push(newCamp);
 	// res.send("You have reached the post route!");
 });
