@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 
 
 // INDEX Campgrounds page
-app.get("/campgrounds", (req, res) => {
+app.get("/campground", (req, res) => {
 	Campground.find({}, (err, allCampgrounds) => {
 		if (err) {
 			console.log(err);
@@ -52,13 +52,13 @@ app.get("/campgrounds", (req, res) => {
 });
 
 // NEW New campground page
-app.get("/campgrounds/new", (req, res) => {
+app.get("/campground/new", (req, res) => {
 	res.render("new");
 });
 
 
 // CREATE Add to campgrounds page
-app.post("/campgrounds", (req, res) => {
+app.post("/campground", (req, res) => {
 	// get data from form and add to the campgrounds array
 	var newCamp = {
 		name: req.body.campName,
@@ -71,7 +71,7 @@ app.post("/campgrounds", (req, res) => {
 			console.log(err);
 		} else {
 			// res.render("campgrounds", {campgrounds:allCampgrounds});
-			res.redirect("/campgrounds");
+			res.redirect("/campground");
 		}
 		// redirect back to campgrounds page
 
@@ -82,7 +82,7 @@ app.post("/campgrounds", (req, res) => {
 });
 
 // SHOW shows more info about a single campground
-app.get("/campgrounds/:id", (req, res) => {
+app.get("/campground/:id", (req, res) => {
 	Campground.findById(req.params.id, (err, foundCampground) => {
 		if (err) {
 			console.log(err);
@@ -90,6 +90,41 @@ app.get("/campgrounds/:id", (req, res) => {
 			res.render("show", {
 				campDetails: foundCampground
 			});
+		}
+	});
+});
+
+// EDIT
+app.get("/campground/:id/edit", (req, res) => {
+	Campground.findById(req.params.id, (err, foundCampground) =>{
+		if (err) {
+			console.log(err);
+		} else {
+			res.render("edit", {campground: foundCampground});
+		}
+	});
+});
+
+// UPDATE
+app.put("/campground/:id", (req, res) +> {
+	req.body.campground.body = req.sanitize(req.body.campground.body);
+	Campground.findByIdAndUpdate(req.params.id, req.body.blog, (err, updateCampground) => {
+		if (err) {
+			console.log(error);
+		} else {
+			console.log(updateCampground);
+			res.redirect("/campground/" + req.params.id);
+		}
+	});
+});
+
+// DESTROY
+app.delete("/campground/:id", (req, res) => {
+	Campground.findByIdAndDelete(req.params.id, (err) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.redirect("/campground");
 		}
 	});
 });
