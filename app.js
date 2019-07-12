@@ -2,7 +2,9 @@
 const 	express = require("express"),
 		app = express(),
 		bodyParser = require("body-parser"),
-		mongoose = require("mongoose");
+		mongoose = require("mongoose"),
+		methodOverride = require("method-override",
+		expressSanitizer = require("express-sanitizer");
 
 // Set up MongoDB/mongoose using ATLAS to make it server-independent (code pulled from MongoDB atlas page )
 const mongoURI = "mongodb+srv://devidle:" + process.env.MDBauth + "@cluster0-jcmtm.mongodb.net/test?retryWrites=true&w=majority";
@@ -17,10 +19,10 @@ mongoose.connect(mongoURI, {
 });
 
 // module activation and linking
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(expressSanitizer());
 
 // Schema and model
 var campgroundSchema = new mongoose.Schema({
