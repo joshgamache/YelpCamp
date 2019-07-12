@@ -3,7 +3,7 @@ const 	express = require("express"),
 		app = express(),
 		bodyParser = require("body-parser"),
 		mongoose = require("mongoose"),
-		methodOverride = require("method-override",
+		methodOverride = require("method-override"),
 		expressSanitizer = require("express-sanitizer");
 
 // Set up MongoDB/mongoose using ATLAS to make it server-independent (code pulled from MongoDB atlas page )
@@ -59,26 +59,15 @@ app.get("/campground/new", (req, res) => {
 
 // CREATE Add to campgrounds page
 app.post("/campground", (req, res) => {
-	// get data from form and add to the campgrounds array
-	var newCamp = {
-		name: req.body.campName,
-		image: req.body.campImg,
-		description: req.body.campDescription
-	};
-	// Take newly created campground from form and make a new entry
-	Campground.create(newCamp, (err, newlyCreated) => {
+	req.body.campground.body = req.sanitize(req.body.campground.body);
+	Campground.create(req.body.campground, (err, newlyCreatedCampground) => {
 		if (err) {
 			console.log(err);
 		} else {
-			// res.render("campgrounds", {campgrounds:allCampgrounds});
+			console.log(newlyCreatedCampground)
 			res.redirect("/campground");
-		}
-		// redirect back to campgrounds page
-
+		}	// redirect back to campgrounds index page
 	});
-
-	// campgrounds.push(newCamp);
-	// res.send("You have reached the post route!");
 });
 
 // SHOW shows more info about a single campground
@@ -108,7 +97,7 @@ app.get("/campground/:id/edit", (req, res) => {
 // UPDATE
 app.put("/campground/:id", (req, res) +> {
 	req.body.campground.body = req.sanitize(req.body.campground.body);
-	Campground.findByIdAndUpdate(req.params.id, req.body.blog, (err, updateCampground) => {
+	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
 		if (err) {
 			console.log(error);
 		} else {
