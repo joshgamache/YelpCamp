@@ -24,6 +24,9 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(expressSanitizer());
 
+// override with POST having ?_method=PUT or ?_method=DELETE
+app.use(methodOverride('_method'));
+
 // Schema and model
 var campgroundSchema = new mongoose.Schema({
 	name: String,
@@ -77,7 +80,7 @@ app.get("/campground/:id", (req, res) => {
 			console.log(err);
 		} else {
 			res.render("show", {
-				campDetails: foundCampground
+				campground: foundCampground
 			});
 		}
 	});
@@ -95,7 +98,7 @@ app.get("/campground/:id/edit", (req, res) => {
 });
 
 // UPDATE
-app.put("/campground/:id", (req, res) +> {
+app.put("/campground/:id", (req, res) => {
 	req.body.campground.body = req.sanitize(req.body.campground.body);
 	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
 		if (err) {
