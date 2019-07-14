@@ -6,6 +6,9 @@ const 	express = require("express"),
 		methodOverride = require("method-override"),
 		expressSanitizer = require("express-sanitizer");
 
+// Models for database
+const Campground = require("./models/campgrounds");
+
 // Set up MongoDB/mongoose using ATLAS to make it server-independent (code pulled from MongoDB atlas page )
 const mongoURI = "mongodb+srv://devidle:" + process.env.MDBauth + "@cluster0-jcmtm.mongodb.net/test?retryWrites=true&w=majority";
 mongoose.connect(mongoURI, {
