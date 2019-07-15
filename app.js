@@ -8,7 +8,6 @@ const 	express = require("express"),
 
 // Models for database
 const Campground = require("./models/campground"),
-		Comment = require("./models/comment"),
 		seedDB = require("./seeds");
 seedDB();
 
@@ -33,13 +32,13 @@ app.use(expressSanitizer());
 // override with POST having ?_method=PUT or ?_method=DELETE
 app.use(methodOverride('_method'));
 
-// Schema and model
-var campgroundSchema = new mongoose.Schema({
-	name: String,
-	image: String,
-	description: String
-});
-var Campground = mongoose.model("Campground", campgroundSchema);
+// // Schema and model
+// var campgroundSchema = new mongoose.Schema({
+// 	name: String,
+// 	image: String,
+// 	description: String
+// });
+// var Campground = mongoose.model("Campground", campgroundSchema);
 
 // Landing page
 app.get("/", (req, res) => {
@@ -81,7 +80,7 @@ app.post("/campground", (req, res) => {
 
 // SHOW shows more info about a single campground
 app.get("/campground/:id", (req, res) => {
-	Campground.findById(req.params.id).populate("comments").exec(, (err, foundCampground) => {
+	Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
 		if (err) {
 			console.log(err);
 		} else {
