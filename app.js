@@ -7,7 +7,10 @@ const 	express = require("express"),
 		expressSanitizer = require("express-sanitizer");
 
 // Models for database
-const Campground = require("./models/campgrounds");
+const Campground = require("./models/campground"),
+		Comment = require("./models/comment"),
+		seedDB = require("./seeds");
+seedDB();
 
 // Set up MongoDB/mongoose using ATLAS to make it server-independent (code pulled from MongoDB atlas page )
 const mongoURI = "mongodb+srv://devidle:" + process.env.MDBauth + "@cluster0-jcmtm.mongodb.net/test?retryWrites=true&w=majority";
@@ -78,7 +81,7 @@ app.post("/campground", (req, res) => {
 
 // SHOW shows more info about a single campground
 app.get("/campground/:id", (req, res) => {
-	Campground.findById(req.params.id, (err, foundCampground) => {
+	Campground.findById(req.params.id).populate("comments").exec(, (err, foundCampground) => {
 		if (err) {
 			console.log(err);
 		} else {

@@ -8,15 +8,21 @@
         <div class="panel-heading"><img src="<%= campground.image %>" class="img-responsive"></div>
         <div class="panel-body">
             <p><%= campground.description %></p>
-            <form class="form-inline">
+            <!-- <form class="form-inline">
     <div class="form-group">
             <a href="/campground/<%= campground._id %>/edit" class="btn btn-warning">Edit</a>
             <form action="/campground/<%= campground._id %>?_method=DELETE" method="POST">
                 <button class="btn btn-danger">Delete</button>
             </form>
         </div>
-    </form>
-
+    </form> -->
+        </div>
+        <div class="panel-footer">
+            <% campground.comments.forEach(comment => { %>
+                <p>
+                    <strong><%= comment.author %></strong> - <%= comment.text %>
+                </p>
+            <% }) %>
         </div>
 
     </div>
