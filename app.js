@@ -8,6 +8,7 @@ const 	express = require("express"),
 
 // Models for database
 const Campground = require("./models/campground"),
+        Comment = require("./models/comment"),
 		seedDB = require("./seeds");
 seedDB();
 
@@ -32,13 +33,6 @@ app.use(expressSanitizer());
 // override with POST having ?_method=PUT or ?_method=DELETE
 app.use(methodOverride('_method'));
 
-// // Schema and model
-// var campgroundSchema = new mongoose.Schema({
-// 	name: String,
-// 	image: String,
-// 	description: String
-// });
-// var Campground = mongoose.model("Campground", campgroundSchema);
 
 // Landing page
 app.get("/", (req, res) => {
@@ -52,7 +46,7 @@ app.get("/campground", (req, res) => {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render("index", {
+			res.render("campgrounds/index", {
 				campgrounds: allCampgrounds
 			});
 		}
@@ -61,7 +55,7 @@ app.get("/campground", (req, res) => {
 
 // NEW New campground page
 app.get("/campground/new", (req, res) => {
-	res.render("new");
+	res.render("campgrounds/new");
 });
 
 
@@ -84,46 +78,80 @@ app.get("/campground/:id", (req, res) => {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render("show", {
+			res.render("campgrounds/show", {
 				campground: foundCampground
 			});
 		}
 	});
 });
 
-// EDIT
-app.get("/campground/:id/edit", (req, res) => {
-	Campground.findById(req.params.id, (err, foundCampground) =>{
-		if (err) {
-			console.log(err);
-		} else {
-			res.render("edit", {campground: foundCampground});
-		}
-	});
+// Commenting this section out, as the course does not yet act on these -- will be used later once user varification is enacted.
+// // EDIT
+// app.get("/campground/:id/edit", (req, res) => {
+// 	Campground.findById(req.params.id, (err, foundCampground) =>{
+// 		if (err) {
+// 			console.log(err);
+// 		} else {
+// 			res.render("campgrounds/edit", {campground: foundCampground});
+// 		}
+// 	});
+// });
+
+// // UPDATE
+// app.put("/campground/:id", (req, res) => {
+// 	req.body.campground.body = req.sanitize(req.body.campground.body);
+// 	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
+// 		if (err) {
+// 			console.log(error);
+// 		} else {
+// 			console.log(updateCampground);
+// 			res.redirect("/campground/" + req.params.id);
+// 		}
+// 	});
+// });
+
+// // DESTROY
+// app.delete("/campground/:id", (req, res) => {
+// 	Campground.findByIdAndDelete(req.params.id, (err) => {
+// 		if (err) {
+// 			console.log(err);
+// 		} else {
+// 			res.redirect("/campground");
+// 		}
+// 	});
+// });
+
+// Comment routes
+
+// NEW comment
+app.get("/campground/:id/comment/new", (req, res) => {
+    Campground.findById(req.params.id, (err, foundCampground) => {
+        if(err){
+            console.log(err);
+        } else {
+            res.render("comments/new", {campground : foundCampground});
+        }
+    });
 });
 
-// UPDATE
-app.put("/campground/:id", (req, res) => {
-	req.body.campground.body = req.sanitize(req.body.campground.body);
-	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
-		if (err) {
-			console.log(error);
-		} else {
-			console.log(updateCampground);
-			res.redirect("/campground/" + req.params.id);
-		}
-	});
-});
+// CREATE comment
+app.post("/campground/:id/comment", (req, res) => {
+    Campground.findById(req.params.id, (err, foundCampground) => {
+        if(err){
+            console.log(err);
+        } else {
+            Comment.create(req.body.comment, (err, newlyCreatedComment) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    foundCampground.comments.push(newlyCreatedComment);
+                    foundCampground.save();
+                    res.redirect("/campground/" + foundCampground._id);
+                }
+            });
 
-// DESTROY
-app.delete("/campground/:id", (req, res) => {
-	Campground.findByIdAndDelete(req.params.id, (err) => {
-		if (err) {
-			console.log(err);
-		} else {
-			res.redirect("/campground");
-		}
-	});
+        }
+    });
 });
 
 // Server start!

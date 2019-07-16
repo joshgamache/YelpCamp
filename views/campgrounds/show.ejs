@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
 <div class="container">
     <div class="page-header">
@@ -17,6 +17,9 @@
         </div>
     </form> -->
         </div>
+<p>
+    <a class="btn btn-success" href="/campground/<%= campground._id %>/comment/new">Add New Comment</a>
+</p>
         <div class="panel-footer">
             <% campground.comments.forEach(comment => { %>
                 <p>
@@ -28,4 +31,4 @@
     </div>
 </div>
 
-<% include partials/footer %>
+<% include ../partials/footer %>
