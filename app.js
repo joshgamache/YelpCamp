@@ -33,12 +33,10 @@ app.use(expressSanitizer());
 // override with POST having ?_method=PUT or ?_method=DELETE
 app.use(methodOverride('_method'));
 
-
 // Landing page
 app.get("/", (req, res) => {
 	res.render("landing");
 });
-
 
 // INDEX Campgrounds page
 app.get("/campground", (req, res) => {
@@ -57,7 +55,6 @@ app.get("/campground", (req, res) => {
 app.get("/campground/new", (req, res) => {
 	res.render("campgrounds/new");
 });
-
 
 // CREATE Add to campgrounds page
 app.post("/campground", (req, res) => {
@@ -85,7 +82,7 @@ app.get("/campground/:id", (req, res) => {
 	});
 });
 
-// Commenting this section out, as the course does not yet act on these -- will be used later once user varification is enacted.
+// Commenting this section out, as the course does not yet act on these -- will be used later once user verification is enacted.
 // // EDIT
 // app.get("/campground/:id/edit", (req, res) => {
 // 	Campground.findById(req.params.id, (err, foundCampground) =>{
