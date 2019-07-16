@@ -27,7 +27,7 @@ mongoose.connect(mongoURI, {
 // module activation and linking
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use(expressSanitizer());
 
 // override with POST having ?_method=PUT or ?_method=DELETE
