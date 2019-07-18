@@ -3,12 +3,15 @@ const 	express = require("express"),
 		app = express(),
 		bodyParser = require("body-parser"),
 		mongoose = require("mongoose"),
+        passport = require("passport"),
+        localStrategy = require("passport-local"),
 		methodOverride = require("method-override"),
 		expressSanitizer = require("express-sanitizer");
 
 // Models for database
 const Campground = require("./models/campground"),
         Comment = require("./models/comment"),
+        User = require("./models/user"),
 		seedDB = require("./seeds");
 seedDB();
 
