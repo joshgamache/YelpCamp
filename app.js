@@ -48,6 +48,14 @@ app.use(expressSanitizer());
 // override with POST having ?_method=PUT or ?_method=DELETE
 app.use(methodOverride('_method'));
 
+// Middleware function to check if user is authenticated/logged in
+const isLoggedIn = (req, res, next) => {
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+};
+
 // Landing page
 app.get("/", (req, res) => {
 	res.render("landing");
@@ -97,6 +105,7 @@ app.get("/campground/:id", (req, res) => {
 	});
 });
 
+
 // Commenting this section out, as the course does not yet act on these -- will be used later once user verification is enacted.
 // // EDIT
 // app.get("/campground/:id/edit", (req, res) => {
@@ -138,7 +147,7 @@ Comment routes
 */
 
 // NEW comment
-app.get("/campground/:id/comment/new", (req, res) => {
+app.get("/campground/:id/comment/new", isLoggedIn, (req, res) => {
     Campground.findById(req.params.id, (err, foundCampground) => {
         if(err){
             console.log(err);
@@ -149,7 +158,7 @@ app.get("/campground/:id/comment/new", (req, res) => {
 });
 
 // CREATE comment
-app.post("/campground/:id/comment", (req, res) => {
+app.post("/campground/:id/comment", isLoggedIn, (req, res) => {
     Campground.findById(req.params.id, (err, foundCampground) => {
         if(err){
             console.log(err);
@@ -191,6 +200,13 @@ app.post("/register", (req, res) => {
     });
 });
 
+// const isLoggedIn = (req, res, next) => {
+//   if(req.isAuthenticated()){ // .isAuthenticated comes from Passport
+//     return next(); // Returna and run next, which is the next piece whatever the route is. "If the user is logged in, keep going"
+//   }
+//   res.redirect("/login");
+// };
+
 /*
 Login routes
 */
@@ -206,6 +222,12 @@ app.post("/login", passport.authenticate("local",
         successRedirect: "/campground",
         failureRedirect: "/login"
     }), (req, res) => {
+});
+
+// Logout
+app.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/campground");
 });
 
 // Server start!
