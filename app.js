@@ -56,6 +56,12 @@ const isLoggedIn = (req, res, next) => {
     res.redirect("/login");
 };
 
+// Middleware to add user data to all routes
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
+
 // Landing page
 app.get("/", (req, res) => {
 	res.render("landing");
@@ -68,7 +74,7 @@ app.get("/campground", (req, res) => {
 			console.log(err);
 		} else {
 			res.render("campgrounds/index", {
-				campgrounds: allCampgrounds
+				campgrounds: allCampgrounds,
 			});
 		}
 	});
