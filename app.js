@@ -191,6 +191,22 @@ app.post("/register", (req, res) => {
     });
 });
 
+/*
+Login routes
+*/
+
+// Login Form
+app.get("/login", (req, res) => {
+    res.render("login");
+});
+
+// Handling login logic/post
+app.post("/login", passport.authenticate("local",
+    {
+        successRedirect: "/campground",
+        failureRedirect: "/login"
+    }), (req, res) => {
+});
 
 // Server start!
 app.listen(3000, () => {
