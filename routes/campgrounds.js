@@ -92,15 +92,15 @@ router.put("/:id", (req, res) => {
 	});
 });
 
-// // DESTROY
-// router.delete("/campground/:id", (req, res) => {
-// 	Campground.findByIdAndDelete(req.params.id, (err) => {
-// 		if (err) {
-// 			console.log(err);
-// 		} else {
-// 			res.redirect("/campground");
-// 		}
-// 	});
-// });
+// DESTROY
+router.delete("/:id", (req, res) => {
+	Campground.findByIdAndDelete(req.params.id, (err) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.redirect("/campground");
+		}
+	});
+});
 
 module.exports = router;
