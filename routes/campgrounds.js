@@ -85,9 +85,9 @@ router.put("/:id", (req, res) => {
 	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
 		if (err) {
 			console.log(error);
+            res.redirect("/campground");
 		} else {
-			console.log(updateCampground);
-			res.redirect("/campgrounds/" + req.params.id);
+			res.redirect("/campground/" + req.params.id);
 		}
 	});
 });
