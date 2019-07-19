@@ -68,30 +68,29 @@ router.get("/:id", (req, res) => {
 });
 
 
-// Commenting this section out, as the course does not yet act on these -- will be used later once user verification is enacted.
-// // EDIT
-// router.get("/campground/:id/edit", (req, res) => {
-// 	Campground.findById(req.params.id, (err, foundCampground) =>{
-// 		if (err) {
-// 			console.log(err);
-// 		} else {
-// 			res.render("campgrounds/edit", {campground: foundCampground});
-// 		}
-// 	});
-// });
+// EDIT
+router.get("/:id/edit", (req, res) => {
+	Campground.findById(req.params.id, (err, foundCampground) =>{
+		if (err) {
+			console.log(err);
+		} else {
+			res.render("campgrounds/edit", {campground: foundCampground});
+		}
+	});
+});
 
-// // UPDATE
-// router.put("/campground/:id", (req, res) => {
-// 	req.body.campground.body = req.sanitize(req.body.campground.body);
-// 	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
-// 		if (err) {
-// 			console.log(error);
-// 		} else {
-// 			console.log(updateCampground);
-// 			res.redirect("/campground/" + req.params.id);
-// 		}
-// 	});
-// });
+// UPDATE
+router.put("/:id", (req, res) => {
+	req.body.campground.body = req.sanitize(req.body.campground.body);
+	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
+		if (err) {
+			console.log(error);
+            res.redirect("/campground");
+		} else {
+			res.redirect("/campground/" + req.params.id);
+		}
+	});
+});
 
 // // DESTROY
 // router.delete("/campground/:id", (req, res) => {
