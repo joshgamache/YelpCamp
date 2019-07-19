@@ -10,10 +10,10 @@ const 	express = require("express"),
 
 // Models for database
 const Campground = require("./models/campground"),
-        Comment = require("./models/comment"),
         User = require("./models/user"),
+        Comment = require("./models/comment"),
 		seedDB = require("./seeds");
-seedDB();
+// seedDB(); // Seed the database
 
 // reuiring routes
 const commentRoutes = require("./routes/comments"),

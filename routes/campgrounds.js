@@ -3,6 +3,15 @@ const express = require("express"),
 
 const Campground = require("../models/campground");
 
+// TODO Move to it's own module later
+// Middleware function to check if user is authenticated/logged in
+const isLoggedIn = (req, res, next) => {
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+};
+
 /*
 Campground Routes
 */
@@ -21,18 +30,25 @@ router.get("/", (req, res) => {
 });
 
 // NEW New campground page
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
 	res.render("campgrounds/new");
 });
 
 // CREATE Add to campgrounds page
-router.post("/", (req, res) => {
+router.post("/", isLoggedIn, (req, res) => {
 	req.body.campground.body = req.sanitize(req.body.campground.body);
-	Campground.create(req.body.campground, (err, newlyCreatedCampground) => {
+	let author = {
+        id: req.user._id,
+        username: req.user.username
+    }
+    Campground.create(req.body.campground, (err, newlyCreatedCampground) => {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(newlyCreatedCampground)
+            newlyCreatedCampground.author = author;
+            console.log(newlyCreatedCampground);
+            newlyCreatedCampground.save();
+			// console.log(newlyCreatedCampground);
 			res.redirect("/campground");
 		}	// redirect back to campgrounds index page
 	});
