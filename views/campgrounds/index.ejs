@@ -4,7 +4,7 @@
 		<div class="container">
 			<h1>Welcome to YelpCamp.</h1>
 			<p>View our handpicked campgrounds from all over!</p>
-			<p><a href="/campground/new" class="btn btn-primary btn-large">Add a new campground</a></p>
+			<p><a href="/campgrounds/new" class="btn btn-primary btn-large">Add a new campground</a></p>
 		</div>
 	</header>
 	<div class="row">
@@ -21,7 +21,7 @@
 					<img src="<%= campground.image %>">
 					<div class="caption"><h4><%= campground.name %></h4></div>
 				<p>
-					<a href="/campground/<%= campground._id %>" class="btn btn-primary">More info</a>
+					<a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More info</a>
 				</p>
 				</div>
 			</div>

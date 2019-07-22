@@ -45,7 +45,7 @@ router.post("/", isLoggedIn, (req, res) => {
                     // save comment
                     foundCampground.comments.push(newlyCreatedComment);
                     foundCampground.save();
-                    res.redirect("/campground/" + foundCampground._id);
+                    res.redirect("/campgrounds/" + foundCampground._id);
                 }
             });
 
