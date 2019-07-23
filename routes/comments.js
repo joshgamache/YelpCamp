@@ -13,6 +13,7 @@ const isLoggedIn = (req, res, next) => {
     res.redirect("/login");
 };
 
+
 /*
 Comment routes
 */
@@ -52,5 +53,27 @@ router.post("/", isLoggedIn, (req, res) => {
         }
     });
 });
+
+// EDIT
+router.get("/:comment_id/edit", (req, res) => {
+    // Is the user logged in?
+    Comment.findById(req.params.comment_id, (err, foundComment) => {
+        res.render("comments/edit", {comment: foundComment});
+    });
+});
+
+// UPDATE
+// router.put("/:id", (req, res) => {
+// 	req.body.campground.body = req.sanitize(req.body.campground.body);
+// 	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
+// 		if (err) {
+// 			console.log(error);
+//             res.redirect("/campgrounds");
+// 		} else {
+// 			res.redirect("/campgrounds/" + req.params.id);
+// 		}
+// 	});
+// });
+
 
 module.exports = router;
