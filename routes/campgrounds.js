@@ -12,6 +12,25 @@ const isLoggedIn = (req, res, next) => {
     res.redirect("/login");
 };
 
+const checkUserAuthorization = (req, res, next) => {
+    if(req.isAuthenticated()){
+        Campground.findById(req.params.id, (err, foundCampground) =>{
+            if(err){
+                console.log(err);
+                res.redirect("back");
+            } else{
+                if(foundCampground.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        })
+    } else {
+        res.redirect("back");
+    }
+};
+
 /*
 Campground Routes
 */
@@ -69,25 +88,22 @@ router.get("/:id", (req, res) => {
 
 
 // EDIT
-router.get("/:id/edit", (req, res) => {
-	Campground.findById(req.params.id, (err, foundCampground) =>{
-		if (err) {
-			console.log(err);
-		} else {
-			res.render("campgrounds/edit", {campground: foundCampground});
-		}
-	});
+router.get("/:id/edit", checkUserAuthorization, (req, res) => {
+    // Is the user logged in?
+    Campground.findById(req.params.id, (err, foundCampground) =>{
+        res.render("campgrounds/edit", {campground: foundCampground});
+    });
 });
 
 // UPDATE
-router.put("/:id", (req, res) => {
+router.put("/:id", checkUserAuthorization, (req, res) => {
 	req.body.campground.body = req.sanitize(req.body.campground.body);
 	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
 		if (err) {
 			console.log(error);
-            res.redirect("/campground");
+            res.redirect("/campgrounds");
 		} else {
-			res.redirect("/campground/" + req.params.id);
+			res.redirect("/campgrounds/" + req.params.id);
 		}
 	});
 });
