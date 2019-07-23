@@ -108,15 +108,15 @@ router.put("/:id", checkUserAuthorization, (req, res) => {
 	});
 });
 
-// // DESTROY
-// router.delete("/campgrounds/:id", (req, res) => {
-// 	Campground.findByIdAndDelete(req.params.id, (err) => {
-// 		if (err) {
-// 			console.log(err);
-// 		} else {
-// 			res.redirect("/campgrounds");
-// 		}
-// 	});
-// });
+// DESTROY
+router.delete("/:id", checkUserAuthorization, (req, res) => {
+	Campground.findByIdAndDelete(req.params.id, (err) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.redirect("/campgrounds");
+		}
+	});
+});
 
 module.exports = router;
