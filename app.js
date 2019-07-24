@@ -61,7 +61,7 @@ app.use((req, res, next) => {
 
 app.use(indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
-app.use("/campgrounds/:id/comment", commentRoutes);
+app.use("/campgrounds/:id/comments", commentRoutes);
 
 // Server start!
 app.listen(3000, () => {

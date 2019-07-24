@@ -4,15 +4,6 @@ const express = require("express"),
 
 const User = require("../models/user");
 
-// TODO Move to it's own module later
-// Middleware function to check if user is authenticated/logged in
-const isLoggedIn = (req, res, next) => {
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-};
-
 // Root route landing page
 router.get("/", (req, res) => {
 	res.render("landing");
