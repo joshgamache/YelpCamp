@@ -3,34 +3,7 @@ const express = require("express"),
 
 const Campground = require("../models/campground");
 const Comment = require("../models/comment");
-
-// TODO Move to it's own module later
-// Middleware function to check if user is authenticated/logged in
-const isLoggedIn = (req, res, next) => {
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-};
-
-const checkCommentAuthorization = (req, res, next) => {
-    if(req.isAuthenticated()){
-        Comment.findById(req.params.comment_id, (err, foundComment) => {
-            if(err){
-                res.redirect("back");
-            } else {
-                if(foundComment.author.id.equals(req.user._id)){
-                    next();
-                } else {
-                    res.redirect("back");
-                }
-            }
-        })
-    } else {
-        res.redirect("back");
-    }
-};
-
+const middleware = require("../middleware/index"); // Middleware functions object
 
 
 

@@ -1,35 +1,8 @@
 const express = require("express"),
     router = express.Router();
 
-const Campground = require("../models/campground");
-
-// TODO Move to it's own module later
-// Middleware function to check if user is authenticated/logged in
-const isLoggedIn = (req, res, next) => {
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-};
-
-const checkUserAuthorization = (req, res, next) => {
-    if(req.isAuthenticated()){
-        Campground.findById(req.params.id, (err, foundCampground) =>{
-            if(err){
-                console.log(err);
-                res.redirect("back");
-            } else{
-                if(foundCampground.author.id.equals(req.user._id)){
-                    next();
-                } else {
-                    res.redirect("back");
-                }
-            }
-        })
-    } else {
-        res.redirect("back");
-    }
-};
+const Campground = require("../models/campground"); // Campground model
+const middleware = require("../middleware"); // Middleware functions object
 
 /*
 Campground Routes
