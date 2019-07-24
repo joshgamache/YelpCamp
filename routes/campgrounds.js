@@ -50,7 +50,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
 // SHOW shows more info about a single campground
 router.get("/:id", (req, res) => {
 	Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
-		if (err) {
+		if (err || !foundCampground) {
             req.flash("error", "Campground not found -- " + err);
 		} else {
 			res.render("campgrounds/show", {
