@@ -3,7 +3,6 @@ const express = require("express"),
     passport = require("passport");
 
 const User = require("../models/user");
-const middleware = require("../middleware/index"); // Middleware functions object
 
 // Root route landing page
 router.get("/", (req, res) => {

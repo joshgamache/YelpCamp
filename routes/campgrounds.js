@@ -22,12 +22,12 @@ router.get("/", (req, res) => {
 });
 
 // NEW New campground page
-router.get("/new", isLoggedIn, (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
 	res.render("campgrounds/new");
 });
 
 // CREATE Add to campgrounds page
-router.post("/", isLoggedIn, (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
 	req.body.campground.body = req.sanitize(req.body.campground.body);
 	let author = {
         id: req.user._id,
@@ -61,7 +61,7 @@ router.get("/:id", (req, res) => {
 
 
 // EDIT
-router.get("/:id/edit", checkUserAuthorization, (req, res) => {
+router.get("/:id/edit", middleware.checkCampgroundAuthorization, (req, res) => {
     // Is the user logged in?
     Campground.findById(req.params.id, (err, foundCampground) =>{
         res.render("campgrounds/edit", {campground: foundCampground});
@@ -69,7 +69,7 @@ router.get("/:id/edit", checkUserAuthorization, (req, res) => {
 });
 
 // UPDATE
-router.put("/:id", checkUserAuthorization, (req, res) => {
+router.put("/:id", middleware.checkCampgroundAuthorization, (req, res) => {
 	req.body.campground.body = req.sanitize(req.body.campground.body);
 	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
 		if (err) {
@@ -82,7 +82,7 @@ router.put("/:id", checkUserAuthorization, (req, res) => {
 });
 
 // DESTROY
-router.delete("/:id", checkUserAuthorization, (req, res) => {
+router.delete("/:id", middleware.checkCampgroundAuthorization, (req, res) => {
 	Campground.findByIdAndDelete(req.params.id, (err) => {
 		if (err) {
 			console.log(err);

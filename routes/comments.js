@@ -3,7 +3,7 @@ const express = require("express"),
 
 const Campground = require("../models/campground");
 const Comment = require("../models/comment");
-const middleware = require("../middleware/index"); // Middleware functions object
+const middleware = require("../middleware"); // Middleware functions object
 
 
 
@@ -12,7 +12,7 @@ Comment routes
 */
 
 // NEW comment
-router.get("/new", isLoggedIn, (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
     Campground.findById(req.params.id, (err, foundCampground) => {
         if(err){
             console.log(err);
@@ -23,7 +23,7 @@ router.get("/new", isLoggedIn, (req, res) => {
 });
 
 // CREATE comment
-router.post("/", isLoggedIn, (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
     Campground.findById(req.params.id, (err, foundCampground) => {
         if(err){
             console.log(err);
@@ -48,7 +48,7 @@ router.post("/", isLoggedIn, (req, res) => {
 });
 
 // EDIT
-router.get("/:comment_id/edit", checkCommentAuthorization, (req, res) => {
+router.get("/:comment_id/edit", middleware.checkCommentAuthorization, (req, res) => {
     Comment.findById(req.params.comment_id, (err, foundComment) => {
         if(err){
             res.redirect("back");
@@ -59,7 +59,7 @@ router.get("/:comment_id/edit", checkCommentAuthorization, (req, res) => {
 });
 
 // UPDATE
-router.put("/:comment_id", checkCommentAuthorization,  (req, res) => {
+router.put("/:comment_id", middleware.checkCommentAuthorization,  (req, res) => {
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment) => {
         if(err){
             res.redirect("back");
@@ -70,7 +70,7 @@ router.put("/:comment_id", checkCommentAuthorization,  (req, res) => {
 });
 
 // DESTROY
-router.delete("/:comment_id", checkCommentAuthorization, (req, res) => {
+router.delete("/:comment_id", middleware.checkCommentAuthorization, (req, res) => {
     Comment.findByIdAndDelete(req.params.comment_id, (err) => {
         if(err){
             res.redirect("back");
