@@ -6,7 +6,8 @@ const 	express = require("express"),
         passport = require("passport"),
         localStrategy = require("passport-local"),
 		methodOverride = require("method-override"),
-		expressSanitizer = require("express-sanitizer");
+		expressSanitizer = require("express-sanitizer"),
+        flash = require("connect-flash");
 
 // Models for database
 const Campground = require("./models/campground"),
@@ -49,6 +50,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(expressSanitizer());
+app.use(flash()); //connect-flash module
 
 // override with POST having ?_method=PUT or ?_method=DELETE
 app.use(methodOverride('_method'));
@@ -56,6 +58,8 @@ app.use(methodOverride('_method'));
 // Middleware to add user data to all routes
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 

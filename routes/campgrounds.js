@@ -12,7 +12,7 @@ Campground Routes
 router.get("/", (req, res) => {
 	Campground.find({}, (err, allCampgrounds) => {
 		if (err) {
-			console.log(err);
+            req.flash("error", "Database error -- " + err);
 		} else {
 			res.render("campgrounds/index", {
 				campgrounds: allCampgrounds,
@@ -35,12 +35,13 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
     }
     Campground.create(req.body.campground, (err, newlyCreatedCampground) => {
 		if (err) {
-			console.log(err);
+            req.flash("error", "Database error -- " + err);
 		} else {
             newlyCreatedCampground.author = author;
             console.log(newlyCreatedCampground);
             newlyCreatedCampground.save();
 			// console.log(newlyCreatedCampground);
+            req.flash("success", "New campground created.");
 			res.redirect("campgrounds");
 		}	// redirect back to campgrounds index page
 	});
@@ -49,8 +50,8 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
 // SHOW shows more info about a single campground
 router.get("/:id", (req, res) => {
 	Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
-		if (err) {
-			console.log(err);
+		if (err || !foundCampground) {
+            req.flash("error", "Campground not found -- " + err);
 		} else {
 			res.render("campgrounds/show", {
 				campground: foundCampground
@@ -73,7 +74,7 @@ router.put("/:id", middleware.checkCampgroundAuthorization, (req, res) => {
 	req.body.campground.body = req.sanitize(req.body.campground.body);
 	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updateCampground) => {
 		if (err) {
-			console.log(error);
+            req.flash("error", "Campground not found -- " + err);
             res.redirect("/campgrounds");
 		} else {
 			res.redirect("/campgrounds/" + req.params.id);
@@ -85,8 +86,9 @@ router.put("/:id", middleware.checkCampgroundAuthorization, (req, res) => {
 router.delete("/:id", middleware.checkCampgroundAuthorization, (req, res) => {
 	Campground.findByIdAndDelete(req.params.id, (err) => {
 		if (err) {
-			console.log(err);
+            req.flash("error", "Campground not found -- " + err);
 		} else {
+            req.flash("success", "Campground has been deleted.");
 			res.redirect("/campgrounds");
 		}
 	});
