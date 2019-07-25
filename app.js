@@ -22,7 +22,7 @@ const commentRoutes = require("./routes/comments"),
     indexRoutes = require("./routes/index");
 
 // Set up MongoDB/mongoose using ATLAS to make it server-independent (code pulled from MongoDB atlas page )
-const mongoURI = "mongodb+srv://devidle:" + process.env.MDBauth + "@cluster0-jcmtm.mongodb.net/test?retryWrites=true&w=majority";
+const mongoURI = "process.env.databaseURL";
 mongoose.connect(mongoURI, {
 	useNewUrlParser: true,
 	dbName: "YelpCamp",
