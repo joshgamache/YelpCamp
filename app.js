@@ -10,8 +10,7 @@ const 	express = require("express"),
         flash = require("connect-flash");
 
 // Constant for environment variables and bindings
-const PORT = process.env.PORT || 3000, 
-      DATABASELINK = process.env.databaseURL;
+const PORT = process.env.PORT || 3000;
 
 // Models for database
 const Campground = require("./models/campground"),
@@ -26,7 +25,7 @@ const commentRoutes = require("./routes/comments"),
     indexRoutes = require("./routes/index");
 
 // Set up MongoDB/mongoose using ATLAS to make it server-independent (code pulled from MongoDB atlas page )
-const mongoURI = DATABASELINK;
+const mongoURI = process.env.databaseURL;
 mongoose.connect(mongoURI, {
 	useNewUrlParser: true,
 	dbName: "YelpCamp",
