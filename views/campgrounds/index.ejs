@@ -15,10 +15,12 @@
 			<div class="col-md-3 col-sm-6">
 				<div class="card">
 					<img src="<%= campground.image %>" class="card-img-top">
-						<div class="card-body">
-							<h5 class="card-title"><%= campground.name %></h5>
-							<a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More info</a>
-						</div>
+					<div class="card-body">
+						<h5 class="card-title"><%= campground.name %></h5>
+						<p class="text-right">
+							<a href="/campgrounds/<%= campground._id %>" class="btn btn-primary btn-sm">More info</a>
+						</p>
+					</div>
 				</div>
 			</div>
 		<% }) %>
