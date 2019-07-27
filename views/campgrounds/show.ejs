@@ -1,5 +1,4 @@
 <% include ../partials/header %>
-<!-- TODO update with Bootstrap 4 -->
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -11,39 +10,38 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="thumbnail">
-                <img src="<%= campground.image %>" class="img-responsive">
-                <div class="caption">
-                    <h4 class="pull-right">$<%= campground.price %>/night</h4>
-                    <h4><a><%= campground.name %></a></h4>
-                    <p><%= campground.description %></p>
+            <div class="card">
+                <img src="<%= campground.image %>" id="coverCard" class="card-image-top img-fluid">
+                <div class="card-body">
+                    <h4 class="float-right">$<%= campground.price %>/night</h4>
+                    <h2 class="card-title"><a><%= campground.name %></a></h4>
+                    <p class="card-text"><%= campground.description %></p>
                     <p><em>Submitted by <%= campground.author.username %></em></p>
                     <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
                         <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-warning">Edit campground</a>
                         <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST" class="delete-form">
-                            <button class="btn btn-danger">Delete campground</button>
+                            <button class="btn btn-outline-danger float-right">Delete campground</button>
                         </form>
                     <% } %>
                 </div>
             </div>
-            <div class="well">
-                <div class="text-right">
-                    <a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-success">Add new comment</a>
-                </div>
-                <hr>
-                <% campground.comments.forEach(comment => { %>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <strong><%= comment.author.username %></strong><span class="pull-right">10 days ago</span>
-                            <p><%= comment.text %></p>
-                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-                                <a href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit" class="btn btn-warning btn-xs">Edit</a>
-                                <form action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" class="delete-form">
-                                    <button class="btn btn-danger btn-xs">Delete</button>
-                                </form>
-                            <% } %>
-                        </div>
+            <div class="card my-1">
+                <div class="card-header mb-2">
+                    <div class="float-right">
+                        <a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-success">Add new comment</a>
                     </div>
+                </div>
+                <% campground.comments.forEach(comment => { %>
+                    <blockquote class="blockquote my-2 px-3">
+                        <p class="mb-0"><%= comment.text %></p>
+                        <footer class="blockquote-footer"><%= comment.author.username %><strong class="float-right">10 days ago</strong></footer>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                        <form action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" class="delete-form">
+                            <button class="btn btn-sm btn-outline-danger float-right">Delete</button>
+                        </form>
+                        <a href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit" class="btn btn-outline-warning btn-sm float-right">Edit</a>
+                            <% } %>
+                    </blockquote>
                 <% }); %>
             </div>
         </div>
