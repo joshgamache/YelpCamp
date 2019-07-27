@@ -1,36 +1,53 @@
 <!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>YelpCamp</title>
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/stylesheets/landing.css">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+  </head>
 <!-- TODO update with Bootstrap 4 -->
+<body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto my-auto flex-column align-middle">
+    <main role="main" class="inner cover">
+    <h1 class="cover-heading">Welcome to YelpCamp.</h1>
+    <p class="lead">A final project for my Web Developer Bootcamp.</p>
+    <p class="lead">
+      <a href="/campgrounds" class="btn btn-lg btn-secondary">See all the campgrounds</a>
+    </p>
+  </main>
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>YelpCamp</title>
-        <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
-        <!-- Link to Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="/stylesheets/landing.css">
-    </head>
-<body>
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+          <p>Created by <a href="http://www.jgamache.ca">Josh Gamache</a>.</p>
+          <p>View this project on <a href="https://github.com/Infiniwild/YelpCamp">my Github</a>.</p>
 
-<div class="container">
-    <% if(error && error.length > 0){ %>
-        <div class="alert alert-danger" role="alert"><%= error %></div>
-    <% } %>
-    <% if(success && success.length > 0){ %>
-        <div class="alert alert-success" role="alert"><%= success %></div>
-    <% } %>
-</div>
-<!-- <img src="https://cdn.pixabay.com/photo/2016/02/09/16/35/night-1189929_960_720.jpg" class="cover"> -->
-<img src="https://cdn.pixabay.com/photo/2016/11/29/04/17/bonfire-1867275_960_720.jpg" class="cover">
-
-
-<div class="container">
-    <div class="row">
-        <div id="landing-centered">
-            <h1 class="text-center"><strong>Welcome to YelpCamp!</strong></h1>
-            <a href="/campgrounds" class="btn btn-primary btn-lg">See all the campgrounds.</a>
-        </div>
     </div>
+</footer>
 </div>
+
+<!-- Required JS for Bootstrap 4 -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<!--  -->
+<!-- Old code below -->
