@@ -1,34 +1,50 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>YelpCamp</title>
-        <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
-        <!-- Link to Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="/stylesheets/landing.css">
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>YelpCamp</title>
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/stylesheets/landing.css">
 <body>
-
-<div class="container">
-    <% if(error && error.length > 0){ %>
-        <div class="alert alert-danger" role="alert"><%= error %></div>
-    <% } %>
-    <% if(success && success.length > 0){ %>
-        <div class="alert alert-success" role="alert"><%= success %></div>
-    <% } %>
-</div>
-<!-- <img src="https://cdn.pixabay.com/photo/2016/02/09/16/35/night-1189929_960_720.jpg" class="cover"> -->
-<img src="https://cdn.pixabay.com/photo/2016/11/29/04/17/bonfire-1867275_960_720.jpg" class="cover">
-
-
-<div class="container">
-    <div class="row">
-        <div id="landing-centered">
-            <h1 class="text-center"><strong>Welcome to YelpCamp!</strong></h1>
-            <a href="/campgrounds" class="btn btn-primary btn-lg">See all the campgrounds.</a>
-        </div>
+<!-- Cover in the back, image carousel -->
+<header>
+  <div class="carousel slide carousel-fade" data-ride="carousel" id="bg-carousel">
+    <div class="carousel-inner" role="listbox">
+      <!-- Slide One - Set the background image for this slide in the line below -->
+      <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1455763916899-e8b50eca9967?q=75&fm=jpg&h=1440')">
+      </div>
+      <!-- Slide Two - Set the background image for this slide in the line below -->
+      <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1475483768296-6163e08872a1?q=75&fm=jpg&h=1440')">
+      </div>
+      <!-- Slide Three - Set the background image for this slide in the line below -->
+      <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1468956398224-6d6f66e22c35?q=75&fm=jpg&h=1440')">
+      </div>
     </div>
+  </div>
+</header>
+
+<!-- Main header and call to action -->
+<div class="row mx-0">
+  <div class="col-lg-6 col-md-8 mx-auto mt-5">
+    <div class="card text-white">
+      <div class="card-body">
+        <h1 class="display-4">Welcome to YelpCamp</h1>
+        <p class="lead">A final project for the Web Developer Bootcamp.</p>
+        <a href="/campgrounds" class="btn btn-lg btn-primary float-right">See all the campgrounds</a>
+      </div>
+      <!-- Footer -->
+      <div class="card-footer">
+        <span class="float-left">Created by <a href="http://www.jgamache.ca" class="text-reset font-weight-bold">Josh Gamache</a></span>
+        <span class="float-right">View this project on <a href="https://github.com/Infiniwild/YelpCamp" class="text-reset font-weight-bold">my Github</a></span>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- Required JS for Bootstrap 4 -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
