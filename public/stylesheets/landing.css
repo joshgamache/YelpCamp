@@ -1,41 +1,18 @@
-body {
-    background: #000;
+.carousel-item {
+  position: fixed;
+  height: 100vh;
+  min-height: 350px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #bg-carousel {
-    margin: 0;
+  z-index: -10;
 }
 
-.carousel { z-index: -99; } /* keeps this behind all content */
-.carousel .item {
-    position: fixed;
-    width: 100%; height: 100%;
-    -webkit-transition: opacity 3s;
-    -moz-transition: opacity 3s;
-    -ms-transition: opacity 3s;
-    -o-transition: opacity 3s;
-    transition: opacity 3s;
-
+.card {
+  background-color: rgba(0, 0, 0, 0.4);
 }
-.carousel .one {
-    background: url(https://images.unsplash.com/photo-1455763916899-e8b50eca9967);
-    background-size: cover;
-    -moz-background-size: cover;
-}
-.carousel .two {
-    background: url(https://images.unsplash.com/photo-1475483768296-6163e08872a1);
-    background-size: cover;
-    -moz-background-size: cover;
-}
-.carousel .three {
-    background: url(https://images.unsplash.com/photo-1455763916899-e8b50eca9967);
-    background-size: cover;
-    -moz-background-size: cover;
-}
-.carousel .active.left {
-    left:0;
-    opacity:0;
-    z-index:2;
-}
-
-
