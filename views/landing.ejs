@@ -9,43 +9,42 @@
 <link rel="stylesheet" href="/stylesheets/landing.css">
 <body>
 <!-- Cover in the back, image carousel -->
-<div id="bg-carousel" class="carousel slide carousel-fade">
-  <div class="carousel-inner">
-            <div class="active item one"></div>
-            <div class="item two"></div>
-            <div class="item three"></div>
+<header>
+  <div class="carousel slide carousel-fade" data-ride="carousel" id="bg-carousel">
+    <div class="carousel-inner" role="listbox">
+      <!-- Slide One - Set the background image for this slide in the line below -->
+      <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1455763916899-e8b50eca9967')">
+      </div>
+      <!-- Slide Two - Set the background image for this slide in the line below -->
+      <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1475483768296-6163e08872a1')">
+      </div>
+      <!-- Slide Three - Set the background image for this slide in the line below -->
+      <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1455763916899-e8b50eca9967')">
+      </div>
+    </div>
   </div>
-</div>
-
-
+</header>
 
 <!-- Main header and call to action -->
-<div class="container mx-auto my-auto align-middle">
-    <main class="cover">
-        <h1 class="cover-heading">Welcome to YelpCamp</h1>
-        <p class="lead">A final project for my Web Developer Bootcamp.</p>
-        <p class="lead"><a href="/campgrounds" class="btn btn-lg btn-secondary">See all the campgrounds</a></p>
-    </main>
-</div>
-
-<!-- Footer -->
-
-
-<footer class="mastfoot mt-auto">
-    <div class="inner">
-          <p>Created by <a href="http://www.jgamache.ca">Josh Gamache</a>.</p>
-          <p>View this project on <a href="https://github.com/Infiniwild/YelpCamp">my Github</a>.</p>
-
+<div class="row">
+  <div class="col-lg-4 col-md-8 mx-auto mt-5">
+    <div class="card text-white">
+      <div class="card-body">
+        <h1 class="display-4">Welcome to YelpCamp</h1>
+        <p class="lead">A final project for the Web Developer Bootcamp.</p>
+        <a href="/campgrounds" class="btn btn-lg btn-primary float-right">See all the campgrounds</a>
+      </div>
+      <!-- Footer -->
+      <div class="card-footer">
+        <span class="float-left">Created by <a href="http://www.jgamache.ca" class="text-reset font-weight-bold">Josh Gamache</a></span>
+        <span class="float-right">View this project on <a href="https://github.com/Infiniwild/YelpCamp" class="text-reset font-weight-bold">my Github</a></span>
+      </div>
     </div>
-</footer>
+  </div>
 </div>
 
 <!-- Required JS for Bootstrap 4 -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
-
-<!--  -->
-<!-- Old code below -->
