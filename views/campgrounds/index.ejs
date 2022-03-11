@@ -11,19 +11,26 @@
 		</div>
 	</div>
 	<div class="row text-center" style="display:flex; flex-wrap: wrap;">
-		<% campgrounds.forEach(function(campground) { %>
-			<div class="col-md-3 col-sm-6">
-				<div class="card">
-					<img src="<%= campground.image %>" class="card-img-top">
-					<div class="card-body">
-						<h5 class="card-title"><%= campground.name %></h5>
-						<p class="text-right">
-							<a href="/campgrounds/<%= campground._id %>" class="btn btn-primary btn-sm">More info</a>
-						</p>
+		<% if(currentUser) { % >
+			<% campgrounds.filter(campground => campground.author.id.equals(currentUser._id)).forEach(function(campground) { %>
+				<div class="col-md-3 col-sm-6">
+					<div class="card">
+						<img src="<%= campground.image %>" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title"><%= campground.name %></h5>
+							<p class="text-right">
+								<a href="/campgrounds/<%= campground._id %>" class="btn btn-primary btn-sm">More info</a>
+							</p>
+						</div>
 					</div>
 				</div>
+			<% }) %>
+		<% } %>
+		<% if(!currentUser) { %>
+			<div class="col-md-3 col-sm-6">
+				<h4>Please login to view campgrounds</h4>
 			</div>
-		<% }) %>
+		<% } %>
 	</div>
 </div>
 <% include ../partials/footer %>
