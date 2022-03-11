@@ -13,7 +13,7 @@
 	</div>
 	<div class="row text-center" style="display:flex; flex-wrap: wrap;">
 		<% if(currentUser) { %>
-			<% campgrounds.filter(campground => campground.author.id.equals(currentUser._id)).forEach(function(campground) { %>
+			<% campgrounds.filter(campground => [currentUser._id.toString(), "588c2e092403d111454fff77", "588c2e092403d111454fff71", "588c2e092403d111454fff76"].includes(campground.author.id.toString())).forEach(function(campground) { %>
 				<div class="col-md-3 col-sm-6">
 					<div class="card">
 						<img src="<%= campground.image %>" class="card-img-top">

@@ -28,7 +28,9 @@
             <div class="card my-1">
                 <div class="card-header mb-2">
                     <div class="float-right">
-                        <a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-success">Add new comment</a>
+                        <% if(currentUser && campground.author.id.toString() == currentUser._id.toString()) { %>
+                            <a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-success">Add new comment</a>
+                        <% } %>
                     </div>
                 </div>
                 <% campground.comments.forEach(comment => { %>
